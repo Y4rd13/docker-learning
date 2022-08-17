@@ -7,9 +7,8 @@
   <ol>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#install-docker">Install Docker</a></li>
-    <li><a href="#docker-commands">Docker commands</a></li>
-    <li><a href="#labs">Labs</a></li>
-    <li><a href="#run">Run</a></li>
+    <li><a href="#docker-commands">Docker Commands</a></li>
+    <li><a href="#docker-run">Docker Run</a></li>
     <li><a href="#enviroment-variables">Enviroment Variables</a></li>
     <li><a href="#images">Images</a></li>
     <li><a href="#cmd-vs-entrypoint">CMD vs ENTRYPOINT</a></li>
@@ -95,4 +94,49 @@ For example:
  docker system prune -a --volumes # remove all unused images and containers
  docker rm -vf $(docker ps -aq)  # remove all containers
  docker rmi -f $(docker images -aq) # remove all images
+```
+
+## Docker Run
+
+```bash
+# To run another version of a container (i.e. redis) use the following command, else it will be the latest version:
+docker run -d --name <container name> <image id>
+docker run redis:4.0.14
+
+# Interactive mode (for example, to run a bash shell inside the container):
+docker run -it <image id> # `it` stands for `Interactive` mode pseudo `Terminal`
+docker run -i <container>/<image>
+```
+
+### RUN -PORT MAPPING
+
+To map a port to a container, use the following command:
+
+```bash
+docker run -d -p <port>:<port> <image id>
+docker run -d -p 80:80 -p 443:443 <image id> # map ports 80 and 443 to the container
+docker run -p 80:8000 <container>/<image> # map port 80 to the container on port 8000
+```
+
+This way you can run multiple instances of your application and map them to different ports.
+You can't map to the same port on the docker host more than once.
+
+```bash
+docker run -p 80:8000 django-api/app_1
+docker run -p 5000:8000 django-api/app_2
+docker run -p 5001:8000 django-api/app_3
+docker run -p 6379:6379 redis
+docker run -p 3306:3306 mysql
+```
+
+### RUN -VOLUME MAPPING
+
+To persist data, map a directory outside the container on the Docker host to a directory inside the container:
+
+- this will mount the external directory to a folder inside the Docker container
+- all your data will be stored in the external volume, even if you delete the Docker container
+
+```bash
+docker run -v <host path>:<container path> <image id>
+docker run -d -v /opt/datadir:/var/lib/mongo mongo:3.4
 ```
