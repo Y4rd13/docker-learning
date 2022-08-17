@@ -1,14 +1,23 @@
 # Docker Course
 
-<a href="https://www.youtube.com/watch?v=fqMOX6JJhGo&ab_channel=freeCodeCamp.org">>> video of the course</a>
+<a href="https://www.youtube.com/watch?v=fqMOX6JJhGo&ab_channel=freeCodeCamp.org">>> video of the course <<<</a>
 
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#install-docker">Install Docker</a></li>
+    <ul>
+        <li><a href="#popular-docker-images">Popular docker images</a></li>
+    </ul>
     <li><a href="#docker-commands">Docker Commands</a></li>
     <li><a href="#docker-run">Docker Run</a></li>
+    <ul>
+        <li><a href="#run--port-mapping">RUN -PORT MAPPING</a></li>
+        <li><a href="#run--volume-mapping">RUN -VOLUME MAPPING</a></li>
+        <li><a href="#inspect-container">Inspect Container</a></li>
+        <li><a href="#container-logs">Container Logs</a></li>
+    </ul>
     <li><a href="#enviroment-variables">Enviroment Variables</a></li>
     <li><a href="#images">Images</a></li>
     <li><a href="#cmd-vs-entrypoint">CMD vs ENTRYPOINT</a></li>
@@ -139,4 +148,20 @@ To persist data, map a directory outside the container on the Docker host to a d
 ```bash
 docker run -v <host path>:<container path> <image id>
 docker run -d -v /opt/datadir:/var/lib/mongo mongo:3.4
+```
+
+### Inspect Container
+
+```bash
+# inspect a container and get details about it
+docker inspect <container id>
+docker inspect <container name>
+```
+
+### Container Logs
+
+```bash
+docker logs <container id>
+docker logs <container name> # logs for the most recent container
+docker logs --follow <container id> # follow the logs of the container
 ```
