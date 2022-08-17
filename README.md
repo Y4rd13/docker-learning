@@ -165,3 +165,28 @@ docker logs <container id>
 docker logs <container name> # logs for the most recent container
 docker logs --follow <container id> # follow the logs of the container
 ```
+
+# Enviroment Variables
+
+If you want to pass environment variables to your container, use the following command:
+
+```bash
+# set an enviroment variable
+docker run -e <key>=<value> <image id>
+docker run -e <key>=<value> -e <key>=<value> <image id>
+
+# For example
+docker run -e APP_MODE=production -e SECRET_KEY=<secret key> django-api/app_1
+
+# multiple env variables
+docker run -e <key>=<value> -e <key>=<value> <image id>
+
+# Use insepect to see the env variables
+docker inspect <container id>
+```
+
+# Docker Images
+
+```bash
+
+```
