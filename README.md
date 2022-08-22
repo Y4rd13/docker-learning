@@ -329,8 +329,6 @@ You can associate the container with any other network, specify the network info
 
 ### User-defined networks
 
-Created
-
 ```bash
 docker network create \
     --driver=bridge \
