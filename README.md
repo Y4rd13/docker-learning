@@ -166,7 +166,7 @@ docker logs <container name> # logs for the most recent container
 docker logs --follow <container id> # follow the logs of the container
 ```
 
-# Enviroment Variables
+## Enviroment Variables
 
 If you want to pass environment variables to your container, use the following command:
 
@@ -185,8 +185,36 @@ docker run -e <key>=<value> -e <key>=<value> <image id>
 docker inspect <container id>
 ```
 
-# Docker Images
+## Docker Images
+
+An example for a simple django API build will be:
+
+```Dockerfile
+# INSTRUCTION : ARGUMENT/S
+# Start from a base OS or another image
+FROM Ubuntu
+
+# Install all dependencies
+RUN apt-get update && apt-get install python
+RUN pip install django && pip install djangorestframework
+
+# Copy the files from the local system onto the Docker image
+# and create a directory for the project
+# COPY : CURRENT DIRECTORY : DESTINATION
+COPY . /opt/source-code
+
+# Run the project inside the container with the specified environment variables
+ENTRYPOINT DJANGO_API=/opt/source-code/manage.py runserver
+```
 
 ```bash
+# Build the image
+docker build -t django-api/app_1 .
 
+# # Run the image
+# docker run -d -p 80:8000 django-api/app_1
 ```
+
+In case of failure, you can rebuild the Dockerfile image.
+
+## CMD vs ENTRYPOINT
