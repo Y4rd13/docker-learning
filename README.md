@@ -218,3 +218,59 @@ docker build -t django-api/app_1 .
 In case of failure, you can rebuild the Dockerfile image.
 
 ## CMD vs ENTRYPOINT
+
+- **CMD** is the command that is run when the container is started.
+- **ENTRYPOINT** is the command that is run when the container is started.
+
+**Differences:**
+
+In the case of the
+
+- **CMD**, the command line parameters passed will get replaced entirely.
+- **ENTRYPOINT**, the command line parameters will get appended.
+
+```Dockerfile
+# CMD command parameters
+CMD ["python", "manage.py", "runserver"]
+
+# or also without an array
+CMD python manage.py runserver
+```
+
+The **ENTRYPOINT** instruction is used to specify the command that is run when the container is started as an entrypoint:
+
+```Dockerfile
+# ENTRYPOINT command parameters
+ENTRYPOINT ["python", "manage.py", "runserver"]
+```
+
+But also it can be used like this:
+
+```Dockerfile
+# Dockerfile
+FROM Ubuntu
+...
+ENTRYPOINT ["sleep"]
+
+# then in out bash
+docker run ubuntu-sleeper sleep 10
+```
+
+And then we can use both such as:
+
+```Dockerfile
+FROM Ubuntu
+...
+# example 1
+ENTRYPOINT ["sleep"]
+CMD ["5"]
+
+# example 2
+ENTRYPOINT ["/bin/bash", "-e", "docker-entrypoint.sh"]
+CMD python manage.py runserver 0.0.0.0:8000
+
+# You can override it
+docker run --entrypoint sleep2.0 ubuntu-sleeper 10
+```
+
+## Networking
