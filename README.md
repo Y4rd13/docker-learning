@@ -287,4 +287,11 @@ CMD python manage.py runserver 0.0.0.0:8000
 
 ## Networking
 
+When you look at networking in Docker, when you install Docker, it created three networks automatically:
+`BRIDGE NONE HOST`
+
+- **BRIDGE** is the default network a container gets attached to
+
+`docker run ubuntu`
+
 <p align="right">(<a href="#top"> back to top </a>)</p
