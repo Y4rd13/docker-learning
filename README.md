@@ -55,6 +55,8 @@ Easiest way to install Docker is to use the [Convient Script](https://docs.docke
  sudo docker --version
 ```
 
+<p align="right">(<a href="#top"> back to top </a>)</p>
+
 ### Popular docker images
 
 GO to [Docker Hub](https://hub.docker.com/) and search for images.
@@ -104,6 +106,8 @@ For example:
  docker rm -vf $(docker ps -aq)  # remove all containers
  docker rmi -f $(docker images -aq) # remove all images
 ```
+
+<p align="right">(<a href="#top"> back to top </a>)</p>
 
 ## Docker Run
 
@@ -166,6 +170,8 @@ docker logs <container name> # logs for the most recent container
 docker logs --follow <container id> # follow the logs of the container
 ```
 
+<p align="right">(<a href="#top"> back to top </a>)</p>
+
 ## Enviroment Variables
 
 If you want to pass environment variables to your container, use the following command:
@@ -184,6 +190,8 @@ docker run -e <key>=<value> -e <key>=<value> <image id>
 # Use insepect to see the env variables
 docker inspect <container id>
 ```
+
+<p align="right">(<a href="#top"> back to top </a>)</p>
 
 ## Docker Images
 
@@ -215,7 +223,9 @@ docker build -t django-api/app_1 .
 # docker run -d -p 80:8000 django-api/app_1
 ```
 
-In case of failure, you can rebuild the Dockerfile image.
+In case of failure, you can always rebuild the Dockerfile image.
+
+<p align="right">(<a href="#top"> back to top </a>)</p>
 
 ## CMD vs ENTRYPOINT
 
@@ -273,4 +283,8 @@ CMD python manage.py runserver 0.0.0.0:8000
 docker run --entrypoint sleep2.0 ubuntu-sleeper 10
 ```
 
+<p align="right">(<a href="#top"> back to top </a>)</p>
+
 ## Networking
+
+<p align="right">(<a href="#top"> back to top </a>)</p
