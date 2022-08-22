@@ -275,12 +275,12 @@ FROM Ubuntu
 ENTRYPOINT ["sleep"]
 CMD ["5"]
 
+# You can override it in your terminal
+docker run --entrypoint sleep2.0 ubuntu-sleeper 10
+
 # example 2
 ENTRYPOINT ["/bin/bash", "-e", "docker-entrypoint.sh"]
 CMD python manage.py runserver 0.0.0.0:8000
-
-# You can override it
-docker run --entrypoint sleep2.0 ubuntu-sleeper 10
 ```
 
 <p align="right">(<a href="#top"> back to top </a>)</p>
