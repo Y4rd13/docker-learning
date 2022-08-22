@@ -22,6 +22,14 @@
     <li><a href="#images">Images</a></li>
     <li><a href="#cmd-vs-entrypoint">CMD vs ENTRYPOINT</a></li>
     <li><a href="#networking">Networking</a></li>
+    <ul>
+        <li><a href="#bridge">Bridge</a></li>
+        <li><a href="#none">None</a></li>
+        <li><a href="#host">Host</a></li>
+        <li><a href="#user--defined networks">User-defined networks</a></li>
+        <li><a href="#inspect-network">Inspect Network</a></li>
+        <li><a href="#embedded-dns">Embedded DNS</a></li>
+    </ul>
     <li><a href="#storage">Storage</a></li>
     <li><a href="#compose">Compose</a></li>
     <li><a href="#registry">Registry</a></li>
@@ -288,10 +296,96 @@ CMD python manage.py runserver 0.0.0.0:8000
 ## Networking
 
 When you look at networking in Docker, when you install Docker, it created three networks automatically:
-`BRIDGE NONE HOST`
 
-- **BRIDGE** is the default network a container gets attached to
+`| BRIDGE | NONE | HOST |`
 
-`docker run ubuntu`
+### BRIDGE
+
+`docker run Ubuntu`
+
+Is the default network a container gets attached to.<br/>
+It is a private internal network created by Docker on the host,
+all containers attached to this network by default, and they get an internal IP address,
+usually in the range of `172.17.x.x`.
+<br/><br/>
+**The containers can access** each other using this **internal IP** if required.
+**To access** any of these containers from the outside world, **map the ports** of these containers to the port on the Docker host.
+
+**Another way o access** the containers externally is to associate the container to the host network. This takes out any network isolation between the Docker host and the container. Meaning if you were to run a web server on port 5000. In a web app container, it is automatically as accessible on the same port externally without requiring any port mapping as the web container uses the hosts network.
+
+This will also mean that unlike before,you will now not be able to run multiple web containers on the same host on the same port, as the ports are now common to all containers in the host network.
+
+### NONE
+
+`docker run Ubuntu --network=none`
+
+With the **None** network,the containers are not attached to any network and doesn't have any access to the external network, or other containers. They run in an isolated network.
+
+### HOST
+
+`docker run Ubuntu --network=host`
+
+You can associate the container with any other network, specify the network information, using the network command line parameter like this:
+
+### User-defined networks
+
+Created
+
+```bash
+docker network create \
+    --driver=bridge \
+    --subnet 182.18.0.0/16
+    custom-isolated-network
+```
+
+We could create our own internal network using the command Docker network, create and specify the driver which is bridge in this case, and the subnet for that network followed by the custom isolated network name.
+
+Run the `docker network ls` command to list all networks.
+
+### Inspect Network
+
+So how do we see the network settings and the IP address assigned to an existing container? Run the `docker inspect <container-name/id>`, and you will find a section on network settings.
+
+There you can see the type of network the container is attached to its internal IP address, MAC address, and other settings.
+
+```bash
+[
+  {
+     "Id":"35505f7810d17291261a43391d4b6c0846594d415ce4f4d0a6ffbf9cc5109048",
+     "Name":"/blissful_hopper",
+     "NetworkSettings":{
+        "Bridge":
+        "Gateway":"172.17.0.1",
+        "IPAddress":"172.17.0.6",
+        "MacAddress":"02:42:ac:11:00:06",
+        "Networks":{
+           "bridge":{
+              "Gateway":"172.17.0.1",
+              "IPAddress":"172.17.0.6",
+              "MacAddress":"02:42:ac:11:00:06",
+           },
+        }
+     }
+  }
+]
+```
+
+### Embedded DNS
+
+Containers can reach each other using their names.
+
+For example, if you have a web server and a MySQL database container running  
+on the same node. How can I get my web server to access the database on the database container?
+
+The right way to do it is to **use the container name**. All containers in a Docker host can resolve each other with the name of the container. Docker has a built in DNS server that helps the containers to resolve each other using the container name.
+
+---
+
+_How does Docker implement networking?_ What's the technology behind it? Like how are the containers isolated within the host?
+
+Docker uses network namespaces that creates a separate namespace for each container.  
+It then uses virtual Ethernet pairs to connect containers together.
+
+---
 
 <p align="right">(<a href="#top"> back to top </a>)</p
