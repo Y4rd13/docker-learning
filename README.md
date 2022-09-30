@@ -41,7 +41,6 @@
       <li><a href="#storage-drivers">Storage Drivers</a></li>
     </ul>
     <li><a href="#docker-compose">Docker Compose</a></li>
-    <li><a href="#registry">Registry</a></li>
     <li><a href="#engine">Engine</a></li>
     <li><a href="#docker-on-windows">Docker on Windows</a></li>
     <li><a href="#container-orchestration">Container Orchestration</a></li>
