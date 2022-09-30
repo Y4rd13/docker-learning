@@ -488,3 +488,22 @@ Docker Compose is a tool that was developed to help define and share multi-conta
 With Compose, we can create a YAML file to define the services and with a single command, can spin everything up or tear it all down.
 
 <p align="right">(<a href="#top"> back to top </a>)</p>
+
+## Update docker-compose
+
+https://stackoverflow.com/questions/49839028/how-to-upgrade-docker-compose-to-latest-version
+
+## Install latest docker-compose
+
+```bash
+VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
+DESTINATION=/usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m) -o $DESTINATION
+sudo chmod 755 $DESTINATION
+```
+
+## Links (depracated)
+
+see [docker website, links](https://docs.docker.com/compose/networking/#links)
+Links are a legacy feature of Docker Compose that allow you to connect one service to another (i.e. two containers).
+Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service’s name.
