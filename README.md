@@ -42,11 +42,6 @@
     </ul>
     <li><a href="#docker-compose">Docker Compose</a></li>
     <li><a href="#engine">Engine</a></li>
-    <li><a href="#docker-on-windows">Docker on Windows</a></li>
-    <li><a href="#container-orchestration">Container Orchestration</a></li>
-    <li><a href="#docker-swarm">Docker Swarm</a></li>
-    <li><a href="#kubernetes">Kubernetes</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
   </ol>
 </details>
 </br>
