@@ -506,3 +506,35 @@ sudo chmod 755 $DESTINATION
 see [docker website, links](https://docs.docker.com/compose/networking/#links)
 Links are a legacy feature of Docker Compose that allow you to connect one service to another (i.e. two containers).
 Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service’s name.
+
+<p align="right">(<a href="#top"> back to top </a>)</p>
+
+# Docker engine
+
+## cgrousp
+
+Cgroups are a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, network, etc.) of a collection of processes.
+A way to limit the resources of a process or a group of processes, and to monitor the usage of those resources:
+
+```bash
+# create a cgroup
+sudo cgcreate -g memory:mygroup
+
+# set the memory limit
+sudo cgset -r memory.limit_in_bytes=100M mygroup
+
+# run a process in the cgroup
+sudo cgexec -g memory:mygroup /bin/bash
+
+# check the memory usage
+cat /sys/fs/cgroup/memory/mygroup/memory.usage_in_bytes
+```
+
+```bash
+docker run --cpus=.5 ubuntu
+docker run --memory=100m ubuntu
+```
+
+```
+
+```
