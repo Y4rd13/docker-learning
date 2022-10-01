@@ -234,6 +234,18 @@ docker build -t django-api/app_1 .
 # docker run -d -p 80:8000 django-api/app_1
 ```
 
+To run a Dockerfile, use the following command:
+
+```bash
+docker build -t <image name> .
+docker build . -f Dockerfile -t <image name>/app_1 # build the image
+docker push <image name>/app_1 # push the image to the Docker Hub
+```
+
+```
+
+```
+
 In case of failure, you can always rebuild the Dockerfile image.
 
 <p align="right">(<a href="#top"> back to top </a>)</p>
