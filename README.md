@@ -489,6 +489,7 @@ The selection of the storage driver is done by the docker daemon, and it depends
 # Docker Compose
 
 see [docker website, compose](https://docs.docker.com/get-started/08_using_compose/#:~:text=Docker%20Compose%20is%20a%20tool,or%20tear%20it%20all%20down.)
+[toubleshoot sudo: docker-compose: command not found](https://stackoverflow.com/questions/38775954/sudo-docker-compose-command-not-found)
 
 Docker Compose is a tool that was developed to help define and share multi-container applications.
 With Compose, we can create a YAML file to define the services and with a single command, can spin everything up or tear it all down.
