@@ -66,6 +66,8 @@ Easiest way to install Docker is to use the [Convient Script](https://docs.docke
  sudo docker --version
 ```
 
+Then add docker to group: https://docs.docker.com/engine/install/linux-postinstall/
+
 <p align="right">(<a href="#top"> back to top </a>)</p>
 
 ### Popular docker images
